@@ -1,0 +1,36 @@
+sequenceDiagram
+    participant browser
+    participant server
+Note right of browser: ___________________SINGLE PAGE APPLICATIONS_______________________
+
+activate server
+    browser->>server: https://studies.cs.helsinki.fi/exampleapp/spa
+    server-->>browser: the Html file ( spa.html)
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: the CSS file (Main.css)
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.j
+    activate server
+    server-->>browser: the JavaScript file (spa.js)
+    deactivate server
+
+    Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
+    deactivate server
+
+    Note right of browser: The browser executes the callback function that renders the notes
+
+Note right of browser: After Saving the new note 
+browser->>server: https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+    activate server
+    server-->>browser: Updates the Json data using the request 
+    deactivate server
+  Note right of browser: New note node are added without rendering the html and css files again
+

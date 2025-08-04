@@ -4,8 +4,9 @@ sequenceDiagram
 Note right of browser: ___________________SINGLE PAGE APPLICATIONS_______________________
 
 activate server
+    Note right of browser: if spa is rendered for Frist Time
     browser->>server: https://studies.cs.helsinki.fi/exampleapp/spa
-    server-->>browser: the Html file ( Main.html)
+    server-->>browser: the Html file ( spa.html)
     deactivate server
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
@@ -15,7 +16,7 @@ activate server
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.j
     activate server
-    server-->>browser: the JavaScript file (Main.js)
+    server-->>browser: the JavaScript file (spa.js)
     deactivate server
 
     Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server
@@ -26,11 +27,3 @@ activate server
     deactivate server
 
     Note right of browser: The browser executes the callback function that renders the notes
-
-Note right of browser: After Saving the new note 
-browser->>server: https://studies.cs.helsinki.fi/exampleapp/new_note_spa
-    activate server
-    server-->>browser: Updates the Json data using the request 
-    deactivate server
-  Note right of browser: New note node are added without rendering the html and css files again
-
